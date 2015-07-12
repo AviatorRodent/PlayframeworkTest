@@ -22,7 +22,7 @@ div.mainview:after {
 }
 html,body { height: 100% }
 body {
-  padding-top: 100px;
+  padding-top: 20px;
 }
 .newsitem {
     min-height: 25em;
@@ -44,4 +44,13 @@ img.newsitem-image {
 }
 .newsitem-pubdate {
     font-size: 0.9em;
+}
+div.logo img {
+    min-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+div.logo {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }

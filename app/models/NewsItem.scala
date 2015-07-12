@@ -80,7 +80,7 @@ object NewsItem extends ((
    * Fetch all NewsItem records from the database
    * @return
    */
-  def getAll() = {
+  def getAll = {
     DB.withConnection { implicit connection =>
       SQL( "SELECT * FROM newsitem ORDER BY pubDate DESC" ).as(rowParser *)
     }
