@@ -1,0 +1,25 @@
+@(message: String, newsitems: List[NewsItem])(implicit brand: String)
+
+@main("Welcome to Play") {
+
+    <div class="container mainview">
+        <h2>@message</h2>
+        <div class="row">
+        @for((newsitem,index) <- newsitems.zipWithIndex){
+            <div class="newsitem col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <img src="@newsitem.enclosure" class="img-response newsitem-image center-block"/>
+                <div class="newsitem-title">
+                    @Html(newsitem.title)
+                </div>
+                <div class="newsitem-description">
+                    @Html(newsitem.description)
+                </div>
+                <div class="newsitem-pubdate">
+                    <strong>Published on:</strong> @newsitem.getPubDate
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+
+}

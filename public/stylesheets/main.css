@@ -1,0 +1,47 @@
+.navbar-inner {
+    background-image: url("/assets/images/navigation_background.jpeg") !important;
+}
+body {
+    background-image: url("/assets/images/SKIN.jpg") !important;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #fff;
+}
+div.mainview {
+    background-color: #fff;
+    min-height: 100%;
+}
+div.mainview:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+.navbar-inverse {
+    background-image: url("/assets/images/navigation_background.jpeg") !important;
+}
+html,body { height: 100% }
+body {
+  padding-top: 100px;
+}
+.newsitem {
+    min-height: 25em;
+    margin-bottom: 20px;
+}
+img.newsitem-image {
+    min-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+.newsitem-title {
+    min-width: 100% !important;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+.newsitem-description {
+    min-width: 100% !important;
+
+}
+.newsitem-pubdate {
+    font-size: 0.9em;
+}
