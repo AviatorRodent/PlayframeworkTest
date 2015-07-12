@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import anorm._
 import anorm.SqlParser._
 import java.util.Locale
+import anorm.Column.columnToString
 
 /**
  * Created by Richard Poole on 11/07/15.
@@ -104,9 +105,26 @@ object NewsItem extends ((
             'pubDate -> newsitem.pubDate,
             'category -> newsitem.category,
             'enclosure -> newsitem.enclosure)
-        .executeInsert() == 1
+        .executeInsert() == 1l
       }
-      true
+    }
+    else {
+      false
+    }
+  }
+
+  def delete(newsitem: NewsItem): Boolean = {
+    if( alreadyExists(newsitem.title, newsitem.pubDate) ){
+      DB.withConnection { implicit connection =>
+        SQL("""
+            DELETE FROM newsitem WHERE
+            title = {title} AND description = {description} AND pubDate = {pubDate}
+            """)
+        .on('title -> newsitem.title,
+            'description -> newsitem.description,
+            'pubDate -> newsitem.pubDate)
+        .executeUpdate() == 1l
+      }
     }
     else {
       false
@@ -121,19 +139,15 @@ object NewsItem extends ((
    */
   def alreadyExists(title: String, pubDate: String): Boolean = {
     DB.withConnection { implicit connection =>
-      val result = SQL("""SELECT count(*) AS count FROM newsitem WHERE
+      val result: Long =
+        SQL("""SELECT count(*) AS count FROM newsitem WHERE
              title = {newTitle} AND
              pubDate = {newPubDate}
         """)
-      .on('newTitle -> title,
-          'newPubDate -> pubDate)
-      .apply()
-      if( result.head[Int]("count") > 0 ){
-        return true
-      }
-      else {
-        return false
-      }
+        .on('newTitle -> title,
+            'newPubDate -> pubDate)
+        .as(scalar[Long].single)
+      result > 0
     }
   }
 
